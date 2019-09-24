@@ -1,15 +1,17 @@
-extern crate rand;
-
 use libcommon_rs::peer::PeerId;
-use minisign_verify::{PublicKey, Signature};
-use rand::prelude::*;
+use libhash::Hash as LibHash;
 
-pub fn sign(&self, hash: String) -> Result<Signature> {
-    Signature::decode(hash).expect("Unable to decode the signature");
-}
+pub trait Signature {
+    type Hash: LibHash;
+    type PublicKey: PeerId;
+    type SecretKey: PeerId;
+    type Error;
 
-pub fn verify(&self, hash: String, signature: Signature, public_key: PublicKey) -> Result<Bool> {
-    public_key.verify(hash, &signature).expect("Signature didn't verify");
+    fn sign(hash: Self::Hash, key: Self::SecretKey) -> Result<Self, Self::Error>
+    where
+        Self: Sized;
+
+    fn verify(&self, hash: Self::Hash, key: Self::PublicKey) -> Result<bool, Self::Error>;
 }
 
 #[cfg(test)]
