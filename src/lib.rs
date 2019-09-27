@@ -1,10 +1,14 @@
 use libcommon_rs::peer::PeerId;
 use libhash::Hash as LibHash;
 
+pub trait SecretKey: PeerId {}
+
+pub trait PublicKey: PeerId {}
+
 pub trait Signature {
     type Hash: LibHash;
-    type PublicKey: PeerId;
-    type SecretKey: PeerId;
+    type PublicKey: PublicKey;
+    type SecretKey: SecretKey;
     type Error;
 
     fn sign(hash: Self::Hash, key: Self::SecretKey) -> Result<Self, Self::Error>
