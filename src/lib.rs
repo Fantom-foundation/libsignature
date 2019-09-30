@@ -1,3 +1,4 @@
+use core::fmt::Debug;
 use core::hash::Hash;
 use libcommon_rs::peer::PeerId;
 use libhash::Hash as LibHash;
@@ -8,7 +9,7 @@ pub trait SecretKey: PeerId {}
 
 pub trait PublicKey: PeerId {}
 
-pub trait Signature: Hash + Serialize + DeserializeOwned {
+pub trait Signature: Hash + Serialize + DeserializeOwned + Debug {
     type Hash: LibHash;
     type PublicKey: PublicKey;
     type SecretKey: SecretKey;
