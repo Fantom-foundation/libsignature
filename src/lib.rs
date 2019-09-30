@@ -1,12 +1,14 @@
 use core::hash::Hash;
 use libcommon_rs::peer::PeerId;
 use libhash::Hash as LibHash;
+use serde::de::DeserializeOwned;
+use serde::Serialize;
 
 pub trait SecretKey: PeerId {}
 
 pub trait PublicKey: PeerId {}
 
-pub trait Signature: Hash {
+pub trait Signature: Hash + Serialize + DeserializeOwned {
     type Hash: LibHash;
     type PublicKey: PublicKey;
     type SecretKey: SecretKey;
