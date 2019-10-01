@@ -9,7 +9,7 @@ pub trait SecretKey: PeerId {}
 
 pub trait PublicKey: PeerId {}
 
-pub trait Signature: Hash + Serialize + DeserializeOwned + Debug {
+pub trait Signature: Hash + Serialize + DeserializeOwned + Debug + Clone + Send {
     type Hash: LibHash;
     type PublicKey: PublicKey;
     type SecretKey: SecretKey;
