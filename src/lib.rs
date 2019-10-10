@@ -4,6 +4,7 @@ use libcommon_rs::peer::PeerId;
 use libhash::Hash as LibHash;
 use serde::de::DeserializeOwned;
 use serde::Serialize;
+extern crate failure;
 
 pub trait PublicKey: PeerId {}
 
@@ -13,7 +14,7 @@ pub trait Signature: Hash + Serialize + DeserializeOwned + Debug + Clone + Send 
     type Hash: LibHash;
     type PublicKey: PublicKey;
     type SecretKey: SecretKey;
-    type Error;
+    type Error: failure::Fail;
 
     fn sign(hash: Self::Hash, key: Self::SecretKey) -> Result<Self, Self::Error>
     where
