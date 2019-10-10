@@ -6,10 +6,13 @@ use serde::de::DeserializeOwned;
 use serde::Serialize;
 extern crate failure;
 
+// Any PublicKey implementation must implement serde::Deserialise
 pub trait PublicKey: PeerId + DeserializeOwned {}
 
-pub trait SecretKey: PeerId {}
+// Any SecretKey implementation must implement serde::Deserialise
+pub trait SecretKey: PeerId + DeserializeOwned {}
 
+// Any Signature implementation must implement serde::Deserialise
 pub trait Signature: Hash + Serialize + DeserializeOwned + Debug + Clone + Send {
     type Hash: LibHash;
     type PublicKey: PublicKey;
