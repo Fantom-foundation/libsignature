@@ -6,7 +6,7 @@ use serde::de::DeserializeOwned;
 use serde::Serialize;
 extern crate failure;
 
-pub trait PublicKey: PeerId {}
+pub trait PublicKey: PeerId + DeserializeOwned {}
 
 pub trait SecretKey: PeerId {}
 
