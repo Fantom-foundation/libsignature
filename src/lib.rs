@@ -5,6 +5,7 @@ use libhash::Hash as LibHash;
 use serde::de::DeserializeOwned;
 use serde::Serialize;
 extern crate failure;
+use rand_core::{CryptoRng, RngCore};
 
 // Any PublicKey implementation must implement serde::Deserialise
 pub trait PublicKey: PeerId + DeserializeOwned {}
@@ -25,7 +26,9 @@ pub trait Signature: Hash + Serialize + DeserializeOwned + Debug + Clone + Send 
 
     fn verify(&self, hash: Self::Hash, key: Self::PublicKey) -> Result<bool, Self::Error>;
 
-    fn generate_key_pair(&self) -> Result<(Self::PublicKey, Self::SecretKey), Self::Error>;
+    fn generate_key_pair<R>(&self, csprng: &mut R) -> Result<(Self::PublicKey, Self::SecretKey), Self::Error>
+    where
+        R: CryptoRng + RngCore;
 
     fn generate_public_key(
         &self,
