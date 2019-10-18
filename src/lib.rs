@@ -6,6 +6,14 @@ use serde::de::DeserializeOwned;
 use serde::Serialize;
 extern crate failure;
 
+/// An enum for identifying various Signature implementations. If you implement one
+/// please add it here.
+#[derive(Clone)]
+pub enum SignatureType {
+    Unknown,
+    Ed25519Dalek,
+}
+
 // Any PublicKey implementation must implement serde::Deserialise
 pub trait PublicKey: PeerId + DeserializeOwned {}
 
