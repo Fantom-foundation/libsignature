@@ -40,3 +40,31 @@ $ cargo test
 # Format, build and test
 $ cargo make
 ```
+
+### Example
+
+#### Prelude
+``` rust
+use libsignature::{PublicKey, SecretKey, Signature;
+```
+
+**An example how to verify signature
+``` rust
+        for (signatory, signature) in event.signatures.iter() {
+            let peer = self.conf.read().unwrap().peers.find_peer(signatory)?;
+            let res = signature.verify(event.get_hash(), peer.get_public_key())?;
+            if !res {
+                return Ok(false);
+            }
+        }
+```
+
+**An example how to sign and create `Signature`
+```rust
+impl<SK, PK, Sig> Struct<SK, PK, Sig>
+where Sig: Signature<Hash=EventHash, PublicKey=PK, SecretKey=SK> {
+    fn some_function() {
+        let signature = Sig::sign(self.get_hash(), self.get_secret_key());
+    }
+}
+```
