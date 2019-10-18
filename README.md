@@ -48,7 +48,7 @@ $ cargo make
 use libsignature::{PublicKey, SecretKey, Signature;
 ```
 
-**An example how to verify signature
+**An example how to verify signature**
 ``` rust
         for (signatory, signature) in event.signatures.iter() {
             let peer = self.conf.read().unwrap().peers.find_peer(signatory)?;
@@ -59,7 +59,7 @@ use libsignature::{PublicKey, SecretKey, Signature;
         }
 ```
 
-**An example how to sign and create `Signature`
+**An example how to sign and create `Signature`**
 ```rust
 impl<SK, PK, Sig> Struct<SK, PK, Sig>
 where Sig: Signature<Hash=EventHash, PublicKey=PK, SecretKey=SK> {
