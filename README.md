@@ -1,8 +1,47 @@
 libsignature
 ============
-![Rust: nightly](https://img.shields.io/badge/Rust-nightly-blue.svg) ![License: MIT](https://img.shields.io/badge/License-MIT-green.svg) [![Build Status](https://travis-ci.org/Fantom-foundation/evm-rs.svg?branch=master)](https://travis-ci.org/Fantom-foundation/evm-rs)
+[![Rust: nightly](https://img.shields.io/badge/Rust-nightly-blue.svg)](https://www.rust-lang.org) [![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE) [![Build Status](https://travis-ci.org/Fantom-foundation/libsignature.svg?branch=master)](https://travis-ci.org/Fantom-foundation/libsignature)
 
 libsignature in Rust.
+
+### Description
+
+This crate defines a set of commonly used traits which can be used for various consensus
+implementations. The crate defines two traits: ConsensusConfiguration and Consensus. The crate
+also defines a base struct (BaseConsensusPeer) which can be used between multiple consensus algorithms.
+
+For an example of an implementation of the traits, refer to the libsignature-dag repository:
+https://github.com/Fantom-foundation/libsignature-dag.
+
+### Example
+
+#### Prelude
+``` rust
+use libsignature::{PublicKey, SecretKey, Signature;
+```
+
+#### An example how to verify signature
+```rust
+for (signatory, signature) in event.signatures.iter() {
+    let peer = self.conf.read().unwrap().peers.find_peer(signatory)?;
+    let res = signature.verify(event.get_hash(), peer.get_public_key())?;
+    if !res {
+        return Ok(false);
+    }
+}
+```
+
+#### An example how to sign and create `Signature`
+```rust
+impl<SK, PK, Sig> Struct<SK, PK, Sig>
+where Sig: Signature<Hash=EventHash, PublicKey=PK, SecretKey=SK> {
+    fn some_function() {
+        let signature = Sig::sign(self.get_hash(), self.get_secret_key());
+    }
+}
+```
+
+---
 
 ## RFCs
 
@@ -16,16 +55,8 @@ We use [rust-clippy](https://github.com/rust-lang-nursery/rust-clippy) linters t
 
 There are plenty of [IDEs](https://areweideyet.com) and other [Rust development tools to consider](https://github.com/rust-unofficial/awesome-rust#development-tools).
 
-### Description
+### CLI instructions
 
-This crate defines a set of commonly used traits which can be used for various consensus
-implementations. The crate defines two traits: ConsensusConfiguration and Consensus. The crate
-also defines a base struct (BaseConsensusPeer) which can be used between multiple consensus algorithms.
-
-For an example of an implementation of the traits, refer to the libsignature-dag repository:
-https://github.com/Fantom-foundation/libsignature-dag.
-
-### Step-by-step guide
 ```bash
 # Install Rust (nightly)
 $ curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- --default-toolchain nightly
@@ -33,38 +64,12 @@ $ curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- --default
 $ cargo install --force cargo-make
 # Install rustfmt (Rust formatter)
 $ rustup component add rustfmt
+# Install clippy (Rust linter)
+$ rustup component add clippy
 # Clone this repo
 $ git clone https://github.com/Fantom-foundation/libsignature && cd libsignature
 # Run tests
 $ cargo test
 # Format, build and test
 $ cargo make
-```
-
-### Example
-
-#### Prelude
-``` rust
-use libsignature::{PublicKey, SecretKey, Signature;
-```
-
-**An example how to verify signature**
-```rust
-for (signatory, signature) in event.signatures.iter() {
-    let peer = self.conf.read().unwrap().peers.find_peer(signatory)?;
-    let res = signature.verify(event.get_hash(), peer.get_public_key())?;
-    if !res {
-        return Ok(false);
-    }
-}
-```
-
-**An example how to sign and create `Signature`**
-```rust
-impl<SK, PK, Sig> Struct<SK, PK, Sig>
-where Sig: Signature<Hash=EventHash, PublicKey=PK, SecretKey=SK> {
-    fn some_function() {
-        let signature = Sig::sign(self.get_hash(), self.get_secret_key());
-    }
-}
 ```
