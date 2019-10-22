@@ -1,6 +1,6 @@
 libsignature
 ============
-[![Build Status](https://travis-ci.org/Fantom-foundation/libsignature.svg?branch=master)](https://travis-ci.org/Fantom-foundation/libsignature)
+![Rust: nightly](https://img.shields.io/badge/Rust-nightly-blue.svg) ![License: MIT](https://img.shields.io/badge/License-MIT-green.svg) [![Build Status](https://travis-ci.org/Fantom-foundation/evm-rs.svg?branch=master)](https://travis-ci.org/Fantom-foundation/evm-rs)
 
 libsignature in Rust.
 
@@ -28,7 +28,7 @@ https://github.com/Fantom-foundation/libsignature-dag.
 ### Step-by-step guide
 ```bash
 # Install Rust (nightly)
-$ curl https://sh.rustup.rs -sSf | sh -s -- --default-toolchain nightly
+$ curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- --default-toolchain nightly
 # Install cargo-make (cross-platform feature-rich reimplementation of Make)
 $ cargo install --force cargo-make
 # Install rustfmt (Rust formatter)
@@ -49,14 +49,14 @@ use libsignature::{PublicKey, SecretKey, Signature;
 ```
 
 **An example how to verify signature**
-``` rust
-        for (signatory, signature) in event.signatures.iter() {
-            let peer = self.conf.read().unwrap().peers.find_peer(signatory)?;
-            let res = signature.verify(event.get_hash(), peer.get_public_key())?;
-            if !res {
-                return Ok(false);
-            }
-        }
+```rust
+for (signatory, signature) in event.signatures.iter() {
+    let peer = self.conf.read().unwrap().peers.find_peer(signatory)?;
+    let res = signature.verify(event.get_hash(), peer.get_public_key())?;
+    if !res {
+        return Ok(false);
+    }
+}
 ```
 
 **An example how to sign and create `Signature`**
