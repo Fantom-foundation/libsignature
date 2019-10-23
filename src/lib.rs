@@ -1,4 +1,5 @@
 use core::fmt::Debug;
+use core::fmt::Display;
 use core::hash::Hash;
 use libcommon_rs::peer::PeerId;
 use libhash::Hash as LibHash;
@@ -15,13 +16,13 @@ pub enum SignatureType {
 }
 
 // Any PublicKey implementation must implement serde::Deserialise
-pub trait PublicKey: PeerId + DeserializeOwned {}
+pub trait PublicKey: PeerId + DeserializeOwned + Display {}
 
 // Any SecretKey implementation must implement serde::Deserialise
-pub trait SecretKey: PeerId + DeserializeOwned {}
+pub trait SecretKey: PeerId + DeserializeOwned + Display {}
 
 // Any Signature implementation must implement serde::Deserialise
-pub trait Signature: Hash + Serialize + DeserializeOwned + Debug + Clone + Send {
+pub trait Signature: Hash + Serialize + DeserializeOwned + Debug + Clone + Send + Display {
     type Hash: LibHash;
     type PublicKey: PublicKey;
     type SecretKey: SecretKey;

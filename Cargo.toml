@@ -1,6 +1,6 @@
 [package]
 name = "libsignature"
-version = "0.1.2"
+version = "0.1.3"
 authors = ["Samuel Marks <807580+SamuelMarks@users.noreply.github.com>"]
 edition = "2018"
 
