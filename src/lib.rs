@@ -28,7 +28,11 @@ pub trait Signature: Hash + Serialize + DeserializeOwned + Debug + Clone + Send 
     type SecretKey: SecretKey;
     type Error: failure::Fail;
 
-    fn sign(hash: Self::Hash, key: Self::SecretKey) -> Result<Self, Self::Error>
+    fn sign(
+        hash: Self::Hash,
+        public: Self::PublicKey,
+        key: Self::SecretKey,
+    ) -> Result<Self, Self::Error>
     where
         Self: Sized;
 
