@@ -62,16 +62,16 @@ matrix:
       env: CLIPPY=1
     - rust: stable
       env: CARGO_TEST=1
-      notifications:
-        slack:
-          secure: 'UzMDp+QAQmykQRh3X2zPZnxICvEH9YPynCPQ6AEsmdVb9Or3VleaYM8i+E7x5jT1HFloBJyI1G0mqrFQIbYDQug5nFUsfB2CYi7L0dpUtvoWbDMGoJ/lDI/wJDt64lqhHf9hs1aeYq454Zqcmx6/oKCgnRSyXip6y/mtOlQYjwhGN0D+TARF+6IohqJMg5iEQg4sWvugVur3GbFbatNeevLOYuhezdun4S8vhzQKsFJBK5QnIuufEyeHHjA3Ii5/yyqXUnxtRnLctjPWR+EROBO/mgqBUXPTwheiYqg9Gw9lYSRuBrtP+eixSKWnknju12YzlhAIF/HegRGzLG2PUGgLuB0TBAraaLYOODpBanVfN7DMvhg72Embdy0lZzVYPN8ImwGIU7jisWPI3x6Zz3zdI1lXZaMFS2ijlbRbYZE1YoOhS0iFQuYUc4dwu+D9Ql+IqZZ+BwE5AOy3cY149WrwGX0xaqwPad80HNHy5PUKKLxE8ZLXD0AQsWxi5M7UrHvJ7XOMRPEkskm6zNBuSXrU1vRibbtOaAC+xdPWop5j0Chf99CuIyH6NeqWVwpvl8ddTJGFZeoNXBXOp6+WAxyAJa1Z77rOvmjhdgrvcFh0o3176KCpFBQM0rWt1IVy1LFFsCP9KzMjBN1vAeEaCJZF0yQjXg/58lUTnR5a28A='
     - stage: notify-website
       env:
-        secure: 't4KBuW+vZN7UJcBQsMDjIPMUiQUkpJpyHpgNqC3wb8JyCJyFaKr0OU/m71umc6ZzfBf/NL6R9vudIl5xJzHU/AYL8oTXaKyLhwO1WWPMTLAOySWDqynBQhcAakfp38YWLXY5KKrkE1UUKm+Mdy9CirGRSK1Pu3KM5vNZGFzADBfijt7AIm6/82d+ecUST6ULOemZHXrNc5P2LuR6c4iAgFqhNWrUAUuDCuU/AHbzLK2+KPqRt5AlIam+oz4VjMh9Vbzyk9szSDP520EIgb6zvLZTzCdrUV7BQCrJmbUNcPlSOjx2N63JxTF91K6HT1ZTEq4vygq48UaHn4EPBe5rz0JPWUfMtRH9IfXY2fCUe/I/BhCaxaikINtIn2yPukgo94nbfVK9Vx/uQWVoCzJ1UvqA3cctTSusxQ/VUPOCQ1HeXxGxFhdv7ERTWreerKjz7+LAqWfVZPZj0uiriSBrt0dIMiDbMwTcNMH1E3DDIPJPfRkOwMhWeOeMrcKFvtLojb1AbdCNlNCXnaujNQkGRNEHLSG2Z2c+vr+LBiHdB3GeVRR7G56ujwR5jq1tD8iXBX3wad/SD6Adj6csGnOYR2ef+R7aynacIkZ1LWhokYKm0460nfggokmRi7Nl/4yQw/dD9SsLyRqKEwp+RZmsborW6EOV6AOc68yxdtM4v50='
+        secure: 'PvjNu/wUDcsWPGnSRrUSG2kwbrdJ3YaPd0nACHDc1YP7Y9hqSOZc1SuY0FjdTxbiNsQdPqsdxlBURolzZz/9SFRyST4Yzli1Fdovb9Ojh7g6LenMvXPj75+CnbzxGjw6Q+xdByETwR8v9uo93E+vSiVn0+7GrMdrkJ6wIrGV+OGhLOBwjJTsvHcfNExOJxryRRCJBgsfXZdqUVrYbNJ2Kv3UMTgnn8X01bNJqn52FGXxC+iLdPHa9cEJZWjVcXIMF/GKvyj4Zb7yNELVfZgNSaNIfuCL7IJMCMyiR7sI66vPc4ayNKx/kdaiXj2jTjy8ktlkJo/qlj6hwbMF48IABlvUVhtkVR4e+IJ4nYAFkeWcBqYHV3RMiQdQJcFH3+uo1CjeAVB2F/kyQ2MQU3y/285zX8yGz6z1E8c45wak50nF/Q/1sw7t+/UQT9ZtqJfhNJ70EnSL/FndlN6cVWvZKXtADOHA/qvx8ESnYn4ZmD9OHtmzGSEJrhyZ53DlR6rjupNmKq8oXGvE2YwRfVBWbS5OLDof50sIEfRR7DbOvuhN0O7yYTxNpYOP1iUcw5oS5FGyfI6+KTBKmyA+kieDPRsD/qGqiUhGmIo9tFDtpqw4YpHbKpq+/jKv9jYCRdtiHojY8VqUE3mKBzVzccJ+t8sYjI+Lz5iuDaHOwXqYvk8='
       script:
-      - git clone https://SamuelMarks:$GH_TOKEN@github.com/Fantom-foundation/fantom-dev-web
-        && cd fantom-dev-web
-      - echo "  | [$TRAVIS_REPO_SLUG](https://github.com/$TRAVIS_REPO_SLUG) | [$TRAVIS_COMMIT_MESSAGE](https://github.com/$TRAVIS_REPO_SLUG/commit/$TRAVIS_COMMIT) |" >> CHANGESLOG.md
-      - git add CHANGESLOG.md
-      - git commit -m "[CHANGESLOG.md] $TRAVIS_REPO_SLUG - $TRAVIS_COMMIT_MESSAGE"
-      - git push -u origin master
+        - email_author="$(git log -1 --pretty=format:'%an <%ce>')"
+        - author="${email_author% *}"; git config --global user.name "$author"
+        - email="${email_author#*<}"; email="${email::-1}"; git config --global user.email "$email"
+        - git clone https://SamuelMarks:$GH_TOKEN@github.com/Fantom-foundation/fantom-dev-web
+          && cd fantom-dev-web
+        - echo "  | [$TRAVIS_REPO_SLUG](https://github.com/$TRAVIS_REPO_SLUG) | [$TRAVIS_COMMIT_MESSAGE](https://github.com/$TRAVIS_REPO_SLUG/commit/$TRAVIS_COMMIT) |" >> CHANGESLOG.md
+        - git add CHANGESLOG.md
+        - git commit -m "[CHANGESLOG.md] $TRAVIS_REPO_SLUG - $TRAVIS_COMMIT_MESSAGE" 
+        - git push -u origin master
