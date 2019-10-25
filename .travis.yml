@@ -22,7 +22,7 @@ before_script:
     TRAVIS_RUST_VERSION="${TRAVIS_RUST_VERSION:-nightly}"
     if [ "$TRAVIS_RUST_VERSION" = 'nightly' ]; then
        printf -v RUSTFMT_VERSION '%s%s' '-' "$(curl -s https://rust-lang.github.io/rustup-components-history/x86_64-unknown-linux-gnu/rustfmt)"
-       if command -v rustc 2>/dev/null; then
+       if ! command -v rustc 2>/dev/null; then
            rustup default "${TRAVIS_RUST_VERSION}${RUSTFMT_VERSION}"
        else
            curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y --profile minimal --default-toolchain "${TRAVIS_RUST_VERSION}${RUSTFMT_VERSION}"
