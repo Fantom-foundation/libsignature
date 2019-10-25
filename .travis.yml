@@ -39,9 +39,9 @@ before_script:
       rustup component add rustfmt
     fi
     if [ -n "$CLIPPY" ]; then
-      rustup component add clippy --toolchain "${TRAVIS_RUST_VERSION}${CLIPPY_VERSION}"
+      rustup component add clippy --toolchain "${TRAVIS_RUST_VERSION}${SMALLEST_COMPAT_RUST}"
     elif [ -n "$BUILD_FMT" ]; then
-      rustup component add rustfmt --toolchain "${TRAVIS_RUST_VERSION}${RUSTFMT_VERSION}"
+      rustup component add rustfmt --toolchain "${TRAVIS_RUST_VERSION}${SMALLEST_COMPAT_RUST}"
     fi
 script:
   - |
