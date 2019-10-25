@@ -25,7 +25,7 @@ before_script:
        printf -v CLIPPY_VERSION '%s%s' '-' "$(curl -s https://rust-lang.github.io/rustup-components-history/x86_64-unknown-linux-gnu/clippy)"
        SMALLEST_COMPAT_RUST="$([[ "$RUSTFMT_VERSION" < "$CLIPPY_VERSION" ]] && echo "$RUSTFMT_VERSION" || echo "$CLIPPY_VERSION")"
 
-       if ! command -v rustc 2>/dev/null; then
+       if command -v rustup 2>/dev/null; then
            rustup default "${TRAVIS_RUST_VERSION}${SMALLEST_COMPAT_RUST}"
        else
            curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y --profile minimal --default-toolchain "${TRAVIS_RUST_VERSION}${SMALLEST_COMPAT_RUST}"
