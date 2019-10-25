@@ -23,7 +23,7 @@ before_script:
     if [ "$TRAVIS_RUST_VERSION" = 'nightly' ]; then
        printf -v RUSTFMT_VERSION '%s%s' '-' "$(curl -s https://rust-lang.github.io/rustup-components-history/x86_64-unknown-linux-gnu/rustfmt)"
        printf -v CLIPPY_VERSION '%s%s' '-' "$(curl -s https://rust-lang.github.io/rustup-components-history/x86_64-unknown-linux-gnu/clippy)"
-       SMALLEST_COMPAT_RUST="$([[ "$RUSTFMT_VERSION" > "$CLIPPY_VERSION" ]] && echo "$RUSTFMT_VERSION" || echo "$CLIPPY_VERSION")"
+       SMALLEST_COMPAT_RUST="$([[ "$RUSTFMT_VERSION" < "$CLIPPY_VERSION" ]] && echo "$RUSTFMT_VERSION" || echo "$CLIPPY_VERSION")"
 
        if ! command -v rustc 2>/dev/null; then
            rustup default "${TRAVIS_RUST_VERSION}${SMALLEST_COMPAT_RUST}"
